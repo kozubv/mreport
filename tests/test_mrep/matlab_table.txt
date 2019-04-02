@@ -1,0 +1,9 @@
+    <strong>LastName </strong><strong>    Age</strong><strong>    Smoker</strong><strong>    Height</strong><strong>    Weight</strong><strong>    BloodPressure</strong>
+    <strong>_________</strong>    <strong>___</strong>    <strong>______</strong>    <strong>______</strong>    <strong>______</strong>    <strong>_____________</strong>
+
+    'Sanchez'    38     true      71        176       124     93   
+    'Johnson'    43     false     69        163       109     77   
+    'Li'         38     true      64        131       125     83   
+    'Diaz'       40     false     67        133       117     75   
+    'Brown'      49     true      64        119       122     80   
+
