@@ -1,0 +1,3 @@
+*.html
+tests[\\\/]tested_reports
+

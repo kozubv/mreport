@@ -4,8 +4,9 @@ close all
 
 
 tb = mrep.Table(2, 3)
-tb.data(:, 2).var = 12;
+%tb.rownum 
+% tb(:, 2) = 12;
+tb.rowLabel(1).var = 'label-1'
+tb.rowLabel(1).h1('werwer')
+tb.rowLabel(1)
 
-
-f1 = tb.data(1, 2);
-f1.h1('handle-content')

@@ -6,7 +6,7 @@ classdef Frame < handle
         content_ = {}
     end %--------------------------------------------------------
    
-    
+
     properties
         var
         backColor
