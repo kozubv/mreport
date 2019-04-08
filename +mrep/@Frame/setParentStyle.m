@@ -1,22 +1,20 @@
-function div = htmlTree( obj )
-if isempty(obj.content_)
-    content = mrep.lib.VarCapture(obj.var);
-else
-    content = htag.empty();
-    for n = 1:length(obj.content_)
-        content(end + 1) = obj.content_{n}.htmlTree();
+function obj = setParentStyle( obj, parent )
+apply_backColor(obj, parent);
+apply_textColor(obj, parent);
+apply_textSize(obj, parent);
+apply_textAlign(obj, parent);
+apply_textStyle(obj, parent);
+apply_borderColor(obj, parent);
+apply_borderWidth(obj, parent);
+
+%parent.style('+', 'width: 1%;');
+if ~isempty(obj.content_)
+    if true %isa(obj.content_{1}, 'mrep.Table')
+        parent.style('+', 'padding: 0px 0px 0px 0px;');
+        parent.style('+', 'width: 1%;');
     end
 end
-div = ht.div(content);
 
-apply_class(obj, div);
-% apply_backColor(obj, div);
-% apply_textColor(obj, div);
-% apply_textSize(obj, div);
-% apply_textAlign(obj, div);
-% apply_textStyle(obj, div);
-% apply_borderColor(obj, div);
-% apply_borderWidth(obj, div);
 end %------------------------------------------------------------
 
 
@@ -55,15 +53,14 @@ if isempty(obj.textAlign)
 end
 
 str = lower(obj.textAlign);
-if any(strcmpi(str{1}, {'center' 'left' 'right' 'justify'}))
-    div.style('+', html.lib.strvar('text-align :$(align);', 'align', str{1}));
-else
-    error(['wrong parameter' str(1)])
-end
-if any(strcmpi(str{2}, {'top' 'bottom' 'middle'}))
-    div.style('+', html.lib.strvar('vertical-align :$(align);', 'align', str{2}));
-else
-    error(['wrong parameter' str(2)])
+str = strsplit(str);
+for n = 1 : length(str)
+    if any(strcmpi(str{n}, {'center' 'left' 'right' 'justify'}))
+        div.style('+', html.lib.strvar('text-align :$(align);', 'align', str{n}));
+    end
+    if any(strcmpi(str{n}, {'top' 'bottom' 'middle'}))
+        div.style('+', html.lib.strvar('vertical-align :$(align);', 'align', str{n}));
+    end
 end
 end %------------------------------------------------------------
 
@@ -90,7 +87,7 @@ if isempty(obj.borderColor)
     return
 end
 div.style('+', html.lib.strvar('border-color :$(color);', ...
-                            'color', obj.borderColor))
+                            'color', obj.borderColor));
 end %------------------------------------------------------------
 
 
@@ -111,4 +108,3 @@ else
     error('width size can be only 1 or 4 [top right bottom left]')
 end
 end %------------------------------------------------------------
-

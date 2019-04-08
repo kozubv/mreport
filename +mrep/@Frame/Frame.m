@@ -5,10 +5,11 @@ classdef Frame < handle
     properties %(Access = private)
         content_ = {}
     end %--------------------------------------------------------
-   
-
+    
+    
     properties
         var
+        class
         backColor
         textColor
         textSize
@@ -21,17 +22,19 @@ classdef Frame < handle
     
     methods
         function obj = Frame()
-            
         end %----------------------------------------------------
         
         % definition in standalone files
-        str = print(obj);
-        content = htmlTree(obj);
         item = h1(obj, content);
         item = h2(obj, content);
         item = h3(obj, content);
         item = text(obj, content);
         item = table(obj, varargin);
+        item = image(obj, varargin);
+        
+        str = print(obj);
+        content = htmlTree(obj);
+        setParentStyle(obj, parent);
         %--------------------------------------------------------
         
         
@@ -41,6 +44,11 @@ classdef Frame < handle
             else
                 error('wrong access')
             end
+        end %----------------------------------------------------
+        
+        function tb = mrep.Table(obj)
+            tb = mrep.Table(1, 1);
+            tb.content_ = obj.content_;
         end %----------------------------------------------------
         
         

@@ -13,9 +13,13 @@ classdef Table < mrep.Frame & mrep.Element
     
     
     methods
-        function obj = Table(row, col)
-            if nargin == 2
-               obj(row, col) = mrep.Table(); 
+        function obj = Table(varargin)
+            if nargin == 2 && isa(varargin{1}, 'double') && isa(varargin{2}, 'double')
+               obj(varargin{1}, varargin{2}) = mrep.Table(); 
+            end
+            if nargin == 1 && istable(varargin{1})
+                obj(size(varargin{1}, 1), size(varargin{1}, 2)) = mrep.Table();
+                obj.ConstructFromTable(varargin{1});
             end
         end %----------------------------------------------------
                      
@@ -26,6 +30,7 @@ classdef Table < mrep.Frame & mrep.Element
         function num = colnum(obj)
             num = size(obj, 2);
         end %----------------------------------------------------
+        
         
         function lb = rowLabel(obj, index)
             if nargin == 1
@@ -41,6 +46,7 @@ classdef Table < mrep.Frame & mrep.Element
             lb = obj(1).row_label_(index);
         end %----------------------------------------------------
 
+        
         function lb = colLabel(obj, index)
             if nargin == 1
                 index = 1:obj.colnum();
@@ -55,13 +61,16 @@ classdef Table < mrep.Frame & mrep.Element
             lb = obj(1).col_label_(index);
         end %----------------------------------------------------
         
+        
+        function flag = isempty(obj)
+            flag = false;
+        end %----------------------------------------------------
+        
         %
         str = htmlTree(obj);
         obj = subsref(obj,s);
         obj = subsasgn(obj,s,varargin);
-        row_names = getRowName(obj, index);
-        col_names = getColName(obj, index);
-        
+        obj = ConstructFromTable(obj, table);
     end %--------------------------------------------------------
     
 end %------------------------------------------------------------

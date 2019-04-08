@@ -4,6 +4,14 @@ table {
 caption {
 	padding: 0px 0px 0px 0px;
 }
+div.table-cell{
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	min-height: 5px;
+	min-width: 20px;
+	max-height: 100%;
+	max-width: 100%;
+}
 
 /*------------------ table-skin's*/
 table.table-skin-a{	
@@ -50,13 +58,12 @@ table.table-skin-b th
 	font-family: consolas, monospace;
 	font-weight: 100;
 	margin: 0px 0px 0px 0px;
-	padding: 0px 32px 0px 12px; 
+	padding: 5px 5px 5px 5px; 
 	color: black;
 }
 .table-compact tr:first-child th {
 	padding: 6px 12px;
 }
-
 
 /*------------------ table-normal*/
 .table-normal{
@@ -73,7 +80,7 @@ table.table-skin-b th
 
 /*------------------ table-full*/
 .table-full{
-	table-layout: fixed;
+	/*table-layout: fixed;*/
 	white-space: pre-wrap;
 	width: 100%;
 ;

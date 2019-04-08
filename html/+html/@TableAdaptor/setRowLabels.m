@@ -7,7 +7,11 @@ end
 
 label_origin = double(obj.has_col_names_);
 for n = label_origin + 1:length(labels)
-    obj.row(n).content_(1).content_ = labels{n};
+    if (isa(labels{n}, 'htag') || isa(labels{n}, 'char'))
+        obj.row(n).content_(1).content_ = labels{n};
+    else 
+        error('label cell can be only "htag" or "char" class objekt');
+    end
 end
 
 end %------------------------------------------------------------

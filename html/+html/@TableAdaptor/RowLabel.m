@@ -5,7 +5,7 @@ function labels = RowLabel( obj, index )
             if n > 0
                 labels(end + 1) = obj.row(n).content_(1);
             else
-                labels(end + 1) = obj.row(obj.height + n + 1).content_(1);
+                labels(end + 1) = obj.row(obj.height + n).content_(1);
             end
         end
     end
