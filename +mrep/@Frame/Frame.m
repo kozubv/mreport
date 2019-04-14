@@ -31,9 +31,10 @@ classdef Frame < handle
         item = text(obj, content);
         item = table(obj, varargin);
         item = image(obj, varargin);
+        item = sample(obj, varargin);
         
         str = print(obj);
-        content = htmlTree(obj);
+        content = htmlTree(obj, parent_page);
         setParentStyle(obj, parent);
         %--------------------------------------------------------
         

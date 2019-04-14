@@ -2,6 +2,7 @@ classdef Handle < mrep.Element
     
     properties (SetAccess = immutable)
         level_ = 1;
+        anchor_id
     end %--------------------------------------------------------
     
     
@@ -19,10 +20,11 @@ classdef Handle < mrep.Element
             par = p.Results;
             obj.level_ = par.level;
             obj.content = par.content;
+            obj.anchor_id = strrep(obj.content, ' ', '-');
         end %----------------------------------------------------
         
         
-        function tag = htmlTree(obj)
+        function tag = htmlTree(obj, parent_page)
             switch obj.level_
                 case 1
                     tag = ht.h1();
@@ -33,7 +35,7 @@ classdef Handle < mrep.Element
                 otherwise
                     error('wrong level');
             end    
-            tag.content_ = obj.content;
+            tag.content_ = [ht.a().id(obj.anchor_id) obj.content];
         end %----------------------------------------------------     
         
     end %--------------------------------------------------------

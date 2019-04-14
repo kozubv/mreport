@@ -1,7 +1,7 @@
 classdef (Abstract = true) Element < handle
     
     methods (Abstract = true)
-        html = htmlTree(obj);
+        html = htmlTree(obj, parent_page);
     end %--------------------------------------------------------
     
     

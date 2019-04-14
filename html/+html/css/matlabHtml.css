@@ -12,7 +12,9 @@ div.table-cell{
 	max-height: 100%;
 	max-width: 100%;
 }
-
+pre{
+	font-size: 13px;
+}
 /*------------------ table-skin's*/
 table.table-skin-a{	
 	border: 3px solid LightGrey;	
@@ -20,7 +22,7 @@ table.table-skin-a{
 table.table-skin-a > tbody > tr > td,
 table.table-skin-a > tbody > tr > th
 {
-	font-size: 12px;
+	font-size: 1rm;
 	border: 1px solid Silver;	
 }
 table.table-skin-a th
@@ -110,8 +112,14 @@ table.table-full > th
 }
 
 
+.btn-link {
+  font-weight: 400;
+  color: darkgray;
+  text-decoration: none;
+}
 
-
-
-
-
+.btn-link:hover {
+  color: darkgray;
+  text-decoration: none;
+}
+/*---------------------------------------------------------*/

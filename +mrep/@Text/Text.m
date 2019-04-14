@@ -14,7 +14,7 @@ classdef Text < mrep.Element
         end %----------------------------------------------------
         
         
-        function str = htmlTree(obj)
+        function str = htmlTree(obj, parent_page)
             str = ht.p(obj.text);
         end %----------------------------------------------------
         

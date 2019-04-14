@@ -23,22 +23,16 @@ classdef Page < html.Page & mrep.Frame
             end
             
         end %----------------------------------------------------
+
         
-        
-        function str = Build(obj)
-            content = obj.htmlTree();
-            for n = 1:length(content)
-                obj.main.content_(end + 1) = content(n);
-            end
-            str = Build@html.Page(obj);
+        function tree = htmlTree(obj)
+            tree = htmlTree@mrep.Frame(obj, obj);
         end %----------------------------------------------------
         
-        
         % API methods
-        %filename = Build(obj);
+        filename = Build(obj);
         %--------------------------------------------------------
         
     end %--------------------------------------------------------
     
 end
-

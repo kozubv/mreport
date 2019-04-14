@@ -8,6 +8,9 @@ obj.head.content_ = [
      ht.link().rel('stylesheet').href(strrep('C:\Users\vad\Desktop\code\html\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\css\bootstrap.css', '\', '\\'));
      ht.link().rel('stylesheet').href(strrep('C:\Users\vad\Desktop\code\matlab\report_generator\html\+html\css\matlabHtml.css', '\', '\\'));
      ht.link().rel('stylesheet').href(strrep('C:\Users\vad\Desktop\code\matlab\report_generator\html\+html\css\page.css', '\', '\\'));
+     ht.script().src(strrep('C:\Users\vad\Desktop\code\html\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\js\jquery.js', '\', '\\'))
+     ht.script().src(strrep('C:\Users\vad\Desktop\code\html\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\js\ajax.js', '\', '\\'))
+     ht.script().src(strrep('C:\Users\vad\Desktop\code\html\bootstrap-4.3.1-dist\bootstrap-4.3.1-dist\js\bootstrap.js', '\', '\\'))
 ];
     
 end

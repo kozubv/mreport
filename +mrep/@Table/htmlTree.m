@@ -1,9 +1,9 @@
-function tree = htmlTree(obj)
+function tree = htmlTree(obj, parent_page)
 
 tbadapt = html.TableAdaptor();
 for n = 1:size(obj, 1)
     for k = 1:size(obj, 2)
-        tag = htmlTree@mrep.Frame(obj(n, k));
+        tag = htmlTree@mrep.Frame(obj(n, k), parent_page);
         tbadapt.setBody([n, k], tag);
         obj(n, k).setParentStyle(tbadapt.getBody([n, k]));
     end

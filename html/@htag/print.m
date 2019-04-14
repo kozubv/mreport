@@ -9,7 +9,7 @@ fields = fieldnames(obj.attributes_);
 for n = 1:length(fields)
     field = fields{n};
     if ~isempty(field)
-        attr = [' ' field '="' obj.attributes_.(field) '"' ];
+        attr = [' ' strrep(field, '_', '-') '="' obj.attributes_.(field) '"' ];
         attributes = horzcat(attributes, attr);
     end
 end

@@ -67,7 +67,7 @@ classdef Table < mrep.Frame & mrep.Element
         end %----------------------------------------------------
         
         %
-        str = htmlTree(obj);
+        str = htmlTree(obj, parent_page);
         obj = subsref(obj,s);
         obj = subsasgn(obj,s,varargin);
         obj = ConstructFromTable(obj, table);

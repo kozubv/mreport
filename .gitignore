@@ -1,3 +1,10 @@
+*.bmp
+*.jpeg
+*.jpg
+*.png
+
 *.html
-tests[\\\/]tested_reports
+
+*.mat
+tests/tested_reports/
 
