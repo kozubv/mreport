@@ -21,7 +21,7 @@ classdef TableAdaptor < handle
     end %--------------------------------------------------------
     
     
-    properties (Access = private, Hidden = true)
+    properties (SetAccess = private, Hidden = true)
         has_row_names_ = false;
         has_col_names_ = false;
     end %--------------------------------------------------------
@@ -52,15 +52,19 @@ classdef TableAdaptor < handle
         end %----------------------------------------------------   
         
         function labels = get.colLabels(obj)
-            if ~obj.has_row_names_
-                error('table has no row labels');
+            if ~obj.has_col_names_
+                %error('table has no row labels');
+                labels = htag.empty();
+                return
             end
             labels = obj.tbody.content_(obj.rowOrigin - 1).content_;
         end %----------------------------------------------------
         
         function labels = get.rowLabels(obj)
-            if ~obj.has_col_names_
-                error('table has no col labels');
+            if ~obj.has_row_names_
+                %error('table has no col labels');
+                labels = htag.empty();
+                return;
             end
             labels = htag.empty();
             for n = 1:obj.height

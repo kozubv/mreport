@@ -1,0 +1,10 @@
+*.bmp
+*.jpeg
+*.jpg
+*.png
+
+*.html
+
+*.mat
+tests/tested_reports/
+

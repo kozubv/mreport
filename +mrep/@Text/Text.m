@@ -10,11 +10,11 @@ classdef Text < mrep.Element
             if nargin == 0
                 text = 'default-text-in-mrep-Text';
             end
-            obj.text = text;
+            obj.text = strrep(text, char(10), '<br>');
         end %----------------------------------------------------
         
         
-        function str = htmlTree(obj)
+        function str = htmlTree(obj, parent_page)
             str = ht.p(obj.text);
         end %----------------------------------------------------
         

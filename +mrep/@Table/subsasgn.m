@@ -1,102 +1,63 @@
-function obj = subsasgn(obj, s, value )
-
-if strcmp(s(1).type, '.') ...
-        && strcmp(s(1).subs, 'data') ...
-        && strcmp(s(2).type, '()') ...
-        && length(s(2).subs) == 2
-    if numel(value) == 1
-        if length(s) == 2
-            % single value assing
-            val_is_frame = isa(value, 'mrep.Frame');
-            if s(2).subs{1}  == ':'
-                nvector = 1:size(obj.data, 1);
-            else
-                nvector = s(2).subs{1};
-            end
-            if s(2).subs{2}  == ':'
-                kvector = 1:size(obj.data, 2);
-            else
-                kvector = s(2).subs{2};
-            end
-            for n = nvector
-                for k = kvector
-                    if val_is_frame
-                        % obj.data(n, k) = value;
-                        obj = builtin('subsasgn', obj, ...
-                            struct('type', {'.' '()'}, ...
-                            'subs', {'data' {n k}}), value);
-                    else
-                        obj.data(n, k) = mrep.Frame;
-                        % obj.data(n, k).value = value;
-                        sup = struct('type', {'.' '()' '.'}, 'subs', {'data' {n k} 'var'});
-                        obj = builtin('subsasgn', obj, sup, value);
-                    end
-                end
-            end
-        elseif length(s) == 3
-            if s(2).subs{1}  == ':'
-                nvector = 1:size(obj.data, 1);
-            else
-                nvector = s(2).subs{1};
-            end
-            if s(2).subs{2}  == ':'
-                kvector = 1:size(obj.data, 2);
-            else
-                kvector = s(2).subs{2};
-            end
-            for n = nvector
-                for k = kvector
-                    obj = builtin('subsasgn', obj, ...
-                        struct('type', {'.' '()' '.'}, ...
-                        'subs', {'data' {n k} s(3).subs}), value);
-                end
-            end
-        else
-            obj = builtin('subsasgn', obj, s, value{:});
-        end
-    elseif size(value, 1) == length(s(2).subs{1}) ...
-            && size(value, 2) == length(s(2).subs{2})
-        % array value assign
-        if s(2).subs{1}  == ':'
-            nvector = 1:size(obj.data, 1);
-        else
-            nvector = s(2).subs{1};
-        end
-        if s(2).subs{2}  == ':'
-            kvector = 1:size(obj.data, 2);
-        else
-            kvector = s(2).subs{2};
-        end
-        for n = nvector
-            for k = kvector
-                if isa(value, 'cell')
-                    val_asgn = value{n, k};
-                    val_is_frame = isa(val_asgn, 'mrep.Frame');
-                elseif isa(value, 'double')
-                    val_asgn = value(n, k);
-                    val_is_frame = isa(val_asgn, 'mrep.Frame');
-                else
-                    error('only cell array or double array');
-                end
-                
-                if val_is_frame
-                    % obj.data(n, k) = value;
-                    obj = builtin('subsasgn', obj, ...
-                        struct('type', {'.' '()'}, ...
-                        'subs', {{'data'} {n k}}), val_asgn);
-                else
-                    obj.data(n, k) = mrep.Frame;
-                    % obj.data(n, k).value = value;
-                    sup = struct('type', {'.' '()' '.'}, 'subs', {'data' {n k} 'var'});
-                    obj = builtin('subsasgn', obj, sup, val_asgn);
-                end
-            end
-        end
+function obj = subsasgn(obj, s, varargin)
+if strcmp(s(1).type, '()') ...
+        && length(s(1).subs) == 2
+    %&& isnumeric(s(1).subs{1}) && isnumeric(s(1).subs{2})
+    %% vactorise asign
+    flag_value_assign = (length(s) == 1);
+    if s(1).subs{1}  == ':'
+        n_index = 1:size(obj, 1);
     else
-        error('ssss');
+        n_index = s(1).subs{1};
+    end
+    if s(1).subs{2}  == ':'
+        k_index = 1:size(obj, 2);
+    else
+        k_index = s(1).subs{2};
+    end
+    if length(varargin) == 1 && length(n_index) == 1 && length(k_index) == 1
+        if ~flag_value_assign
+            sup = @(n, k) struct('type', {s.type}, 'subs', {{n k} s(2:end).subs});
+            value = @(n, k) varargin{1};
+        else
+            error('flag_value_assign')
+        end
+    elseif length(varargin) == 1 && (length(varargin{1}) == 1 || ischar(varargin{1}))
+        if flag_value_assign
+            % issign other matlab type object for frame.var in element
+            sup = @(n, k) struct('type', {'()' '.'}, 'subs', {{n k} 'var'});
+            if iscell(varargin{1})
+                %error('you can not asign cell array');
+                value = @(n, k) varargin{1}{1};
+            else
+                value = @(n, k) varargin{1};
+            end
+        elseif ~flag_value_assign
+            sup = @(n, k) struct('type', {s.type}, 'subs', {{n k} s(2:end).subs});
+            if iscell(varargin{1})
+                value = @(n, k) varargin{1}{1};
+            else
+                value = @(n, k) varargin{1};
+            end
+        end
+    elseif length(varargin) == 1 && size(varargin{1}, 1) == length(n_index) ...
+            && size(varargin{1}, 2) == length(k_index)
+        if flag_value_assign
+            % issign other matlab type object for frame.var in element
+            sup = @(n, k) struct('type', {'()' '.'}, 'subs', {{n k} 'var'});
+            value = @(n, k) varargin{1}(n, k);
+        elseif ~flag_value_assign
+            sup = @(n, k) struct('type', {s.type}, 'subs', {{n k} s.subs(2:end)});
+            value = @(n, k) varargin{1}(n, k);
+        end
+    end
+    for n = n_index
+        for k = k_index
+            obj = builtin('subsasgn', obj, sup(n, k), value(n, k));
+        end
     end
 else
-    obj = builtin('subsasgn',obj,s, value{:});
+    obj = builtin('subsasgn',obj,s, varargin{:});
 end
 
 end %------------------------------------------------------------
+

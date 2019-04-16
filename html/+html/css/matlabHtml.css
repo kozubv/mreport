@@ -1,18 +1,23 @@
 table {
 	border-collapse: collapse;
+	vertical-align: top;
 }
 caption {
 	padding: 0px 0px 0px 0px;
 }
+img{
+	border: 1px black solid;
+}
 
 /*------------------ table-skin's*/
 table.table-skin-a{	
-	border: 3px solid LightGrey;	
+	border: 3px solid LightGrey;
+	vertical-align: top;	
 }
 table.table-skin-a > tbody > tr > td,
 table.table-skin-a > tbody > tr > th
 {
-	font-size: 12px;
+	font-size: 1rm;
 	border: 1px solid Silver;	
 }
 table.table-skin-a th
@@ -22,89 +27,13 @@ table.table-skin-a th
 }
 
 
-/*------------------ table-skin's*/
-table.table-skin-b{	
-	border: 3px solid LightGrey;	
-}
-table.table-skin-b > tbody > tr > td,
-table.table-skin-b > tbody > tr > th
-{
-	font-size: 12px;
-	border: 1px solid Silver;	
-}
-table.table-skin-b th
-{
-	background-color : DarkSeaGreen;
-	text-align: center;
-}
-
-
-/*------------------ table-compact*/
-.table-compact {
-	table-layout: auto;
-	white-space: nowrap;
-}
-.table-compact > tbody > tr > td
-{
-	table-layout: auto;
-	font-family: consolas, monospace;
-	font-weight: 100;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 32px 0px 12px; 
-	color: black;
-}
-.table-compact tr:first-child th {
-	padding: 6px 12px;
-}
-
-
 /*------------------ table-normal*/
-.table-normal{
-	table-layout: auto;
-	white-space: nowrap;
+table.table-normal{
+	white-space: normal;
 }
+
 .table-normal > tbody > tr > td,
 .table-normal > tbody > tr > th
 {
-	padding: 6px 12px;
+	vertical-align: top;
 }
-
-
-
-/*------------------ table-full*/
-.table-full{
-	table-layout: fixed;
-	white-space: pre-wrap;
-	width: 100%;
-;
-}
-table.table-full > td,
-table.table-full > th
-{
-	padding: 6px 12px;
-}
-
-/*------------------ table-container*/
-.table-container {
-	table-layout: auto;
-}
-.table-container > tbody > tr > td
-{
-	table-layout: auto;
-	font-family: consolas, monospace;
-	font-weight: 100;
-	margin: 0px 0px 0px 0px;
-	padding: 0px 0px 0px 0px;
-	color: blue;
-	text-align: center;
-}
-.table-container tr:first-child th {
-	padding: 6px 12px;
-}
-
-
-
-
-
-
-

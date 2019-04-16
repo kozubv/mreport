@@ -29,7 +29,7 @@ function InitializeServiceFolderContent(obj)
     
     fid = fopen(obj.file_config_, 'w');
     try
-        fprintf(fid, obj.ConfigFileContent());
+        fprintf(fid, ['defaoult content' mfilename]);
     catch ERR
         fclose(fid);
         rethrow(ERR);

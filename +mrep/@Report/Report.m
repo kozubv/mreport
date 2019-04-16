@@ -37,26 +37,36 @@ classdef Report < mrep.Page
             addParameter(p, 'flag_reset', false, @islogical);
             parse(p, folder, varargin{:});
             par = p.Results;
+
+            ops.root_folder_ = par.folder;
+            ops.name_ = par.name;
+            ops.folder_ = fullfile(ops.root_folder_, ops.name_);
+            ops.report_file_ = fullfile(ops.folder_, [ops.name_ '.html']);
+            ops.service_folder_ = fullfile(ops.folder_, mrep.Report.service_folder_name);
+            ops.folder_images_ = fullfile(ops.service_folder_, mrep.Report.images_folder_name);
+            ops.folder_html_ = fullfile(ops.service_folder_, mrep.Report.html_folder_name);
+            ops.file_config_ = fullfile(ops.service_folder_, ...
+                                        [mrep.Report.file_config_name '.' mrep.Report.file_config_ext]);
+            ops.folder_related_pages_ = ops.folder_;
+            
+            if par.flag_reset
+                Resetfolder(ops.folder_);
+            end
+            ValidateRootFolder(ops.root_folder_);
+            mrep.Report.InitializeWorkFolderContent(ops);
             
             pagefolder = fullfile(par.folder, par.name);
             obj = obj@mrep.Page(pagefolder, [par.name '.html']);
             
-            obj.root_folder_ = par.folder;
-            obj.name_ = par.name;
-            obj.folder_ = fullfile(obj.root_folder_, obj.name_);
-            obj.report_file_ = fullfile(obj.folder_, [obj.name_ '.html']);
-            obj.service_folder_ = fullfile(obj.folder_, obj.service_folder_name);
-            obj.folder_images_ = fullfile(obj.service_folder_, obj.images_folder_name);
-            obj.folder_html_ = fullfile(obj.service_folder_, obj.html_folder_name);
-            obj.file_config_ = fullfile(obj.service_folder_, ...
-                                        [obj.file_config_name '.' obj.file_config_ext]);
-            obj.folder_related_pages_ = obj.folder_;
-            
-            if par.flag_reset
-                Resetfolder(obj.folder_);
-            end
-            ValidateRootFolder(obj.root_folder_);
-            obj.InitializeWorkFolderContent();
+            obj.root_folder_ = ops.root_folder_;
+            obj.name_ = ops.name_;
+            obj.folder_ = ops.folder_;
+            obj.report_file_ = ops.report_file_;
+            obj.service_folder_ = ops.service_folder_;
+            obj.folder_images_ = ops.folder_images_;
+            obj.folder_html_ = ops.folder_html_;
+            obj.file_config_ = ops.file_config_;
+            obj.folder_related_pages_ = ops.folder_related_pages_;
         end %----------------------------------------------------
         
         
@@ -83,13 +93,14 @@ classdef Report < mrep.Page
         end %----------------------------------------------------
         
         % utils
-        content = ConfigFileContent(obj);
-        status = InitializeWorkFolderContent(obj)
+        %content = ConfigFileContent(obj);
+        %status = InitializeWorkFolderContent(obj)
     end %--------------------------------------------------------  
     
     
     methods (Static)
         flag = isFolderMReport(folder);
+        status = InitializeWorkFolderContent(ops);
     end %--------------------------------------------------------
     
 end %------------------------------------------------------------

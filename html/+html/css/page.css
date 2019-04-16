@@ -2,4 +2,70 @@ main {
 	border: 0px solid black;
 	margin: 20px;
 	overflow: auto;
+	/*padding-bottom: 250px;*/
+}
+
+header{
+	z-index: 2; /* Stay on top */
+	border-bottom: 1px silver solid;
+}
+
+aside.sidenav-full-height {
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 200px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: WhiteSmoke; /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+  overflow: scroll;
+  padding-top: 100px;
+  white-space: nowrap;
+}
+
+main.main-full-height {
+  margin-left: 200px; /* Same as the width of the sidenav */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+.sidenav-full-height a {
+  padding-left: 20px;
+  text-decoration: none;
+  font-size: 1em;
+  color: #818181;
+  display: block;
+}
+
+.sidenav-full-height a:hover {
+  color: black;
+}
+
+aside.sidenav-auto-height {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+main.main-auto-height {
+  margin-left: 140px; /* Same width as the sidebar + left position in px */
+  font-size: 28px; /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media print
+{    
+    aside{
+        display: none !important;
+    }
+	main{
+		margin: 10px 10px 10px 10px !important; 
+	}
 }
