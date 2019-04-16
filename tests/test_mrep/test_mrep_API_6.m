@@ -10,6 +10,7 @@ rep = mrep.Report(root_folder, ...
 page1 = rep.Page('first-page.html');
 page1.h1('first-page-title');
 
+rep.h3('main title 1');
 tb = rep.table(3, 2);
 f1 = figure(1);
 x = 0:512;
@@ -25,15 +26,17 @@ text_content = [...
 'objects in conditional statements, like switch and'...
 'if statements.'];
 
-for n = 1:3
+for n = 1:2
     plot(x, sin(2*pi*x./(n*10)));
     drawnow
     %tb(n, 1).text('a');
     tb(n, 1).text(text_content);
     tb(n, 2).image(f1, ['sin_f_' num2str(n) '_px.png'], rep);
 end
+tb(3, 1).sample(rand(5, 5));
+tb(3, 2).sample(rand(5, 5));
 
-rep.h3('main title 3');
+rep.h3('main title 3 =============');
 rep.h3('main title 4');
 
 rep.Build();

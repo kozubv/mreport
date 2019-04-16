@@ -22,6 +22,7 @@ aside.sidenav-full-height {
   padding-top: 20px;
   overflow: scroll;
   padding-top: 100px;
+  white-space: nowrap;
 }
 
 main.main-full-height {

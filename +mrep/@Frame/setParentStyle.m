@@ -10,8 +10,8 @@ apply_borderWidth(obj, parent);
 %parent.style('+', 'width: 1%;');
 if ~isempty(obj.content_)
     if true %isa(obj.content_{1}, 'mrep.Table')
-        parent.style('+', 'padding: 0px 0px 0px 0px;');
-        parent.style('+', 'width: 1%;');
+        %parent.style('+', 'padding: 0px 0px 0px 0px;');
+        %parent.style('+', 'width: 1%;');
     end
 end
 

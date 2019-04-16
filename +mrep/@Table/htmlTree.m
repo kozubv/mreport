@@ -38,7 +38,7 @@ for n = 1 : length(obj(1).col_label_)
     fr.setParentStyle(td_item(n));
 end 
 
-tbadapt.table.class = 'table-skin-a table-compact';
+tbadapt.table.class = 'table-skin-a table-normal';
 tree = tbadapt.table;
 end %------------------------------------------------------------
 

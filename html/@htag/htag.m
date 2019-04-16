@@ -52,7 +52,7 @@ classdef (InferiorClasses = {? ht }) htag < handle
         % in standalone .m files
         obj = subsref(obj,s);
         obj = subsasgn(obj,s,varargin);
-        str = print(obj);
+        str = print(obj, space);
         str = printformat(obj);
         item = find(obj, id);
         

@@ -21,7 +21,8 @@ if par.sameColFormat
 else
     str = printDiffColFormat(var, par);
 end
-
+str(:, end +1) = char(10);
+str = reshape(str', 1, numel(str));
 end %------------------------------------------------------------
 
 
